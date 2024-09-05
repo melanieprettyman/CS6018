@@ -9,15 +9,12 @@ import android.view.ViewGroup
 import android.widget.ImageButton
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Observer
 
-
-
-// SecondFragment.kt
 class SecondFragment : Fragment() {
 
     private lateinit var drawingView: DrawingView
     private val drawingViewModel: DrawingViewModel by activityViewModels()
-
 
     @SuppressLint("ClickableViewAccessibility")
     override fun onCreateView(
@@ -27,8 +24,13 @@ class SecondFragment : Fragment() {
         val view = inflater.inflate(R.layout.second_fragment, container, false)
         drawingView = view.findViewById(R.id.drawing_view)
 
-        drawingView.setPaths(drawingViewModel.paths)
+        // paths changes, the observer is triggered and updates the DrawingView with
+        // the latest paths from the ViewModel
+        drawingViewModel.paths.observe(viewLifecycleOwner, Observer { paths ->
+            drawingView.setPaths(paths)
+        })
 
+        // Touch listener for drawing actions
         drawingView.setOnTouchListener { _, event ->
             when (event.action) {
                 MotionEvent.ACTION_DOWN -> {
@@ -39,18 +41,20 @@ class SecondFragment : Fragment() {
                     drawingView.continueDrawing(event.x, event.y)
                     true
                 }
+                // Adds the path when drawing is finished and reset the current path in the DrawingView
                 MotionEvent.ACTION_UP -> {
-                    drawingViewModel.paths.add(drawingView.getCurrentPath())
+                    drawingViewModel.addPath(drawingView.getCurrentPath())
+                    drawingView.resetCurrentPath()
                     true
                 }
                 else -> false
             }
         }
+
         val backButton: ImageButton = view.findViewById(R.id.btn_undo)
         backButton.setOnClickListener {
             parentFragmentManager.popBackStack()
         }
-
 
         return view
     }

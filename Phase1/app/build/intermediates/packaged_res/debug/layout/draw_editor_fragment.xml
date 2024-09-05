@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/linear"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <!-- Adjusted ImageButton for Undo -->
+            <ImageButton
+                android:id="@+id/btn_undo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:contentDescription="Back"
+                android:src="@drawable/ic_back"
+                android:background="@null"
+                android:minWidth="48dp"
+                android:minHeight="48dp"
+                android:padding="8dp"/>
+
+            <!-- Adjusted ImageButton for Save -->
+            <ImageButton
+                android:id="@+id/btn_save"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@drawable/ic_floppy_disk"
+                android:contentDescription="Save"
+                android:background="@null"
+                android:minWidth="48dp"
+                android:minHeight="48dp"
+                android:padding="8dp"/>
+
+            <!-- Adjusted ImageButton for Color -->
+            <ImageButton
+                android:id="@+id/btn_color"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@drawable/ic_colorpicker"
+                android:contentDescription="Color"
+                android:background="@null"
+                android:minWidth="48dp"
+                android:minHeight="48dp"
+                android:padding="8dp"/>
+
+            <!-- Adjusted ImageButton for Stroke -->
+            <ImageButton
+                android:id="@+id/btn_stroke"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@drawable/ic_paint_brush"
+                android:contentDescription="Stroke"
+                android:background="@null"
+                android:minWidth="48dp"
+                android:minHeight="48dp"
+                android:padding="8dp"/>
+        </LinearLayout>
+
+        <!-- DrawingView -->
+        <com.example.phase1.DrawingView
+            android:id="@+id/drawing_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+
+</RelativeLayout>

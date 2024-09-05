@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <ImageView
+        android:id="@+id/colorPickerImageView"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:src="@drawable/color_wheel" />
+    <View
+        android:id="@+id/circleSelector"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:background="@drawable/selector_circle"
+        android:visibility="gone" />
+
+    <View
+        android:id="@+id/selectedColorView"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_below="@id/colorPickerImageView"
+        android:layout_marginTop="16dp"
+        android:background="@android:color/darker_gray" />
+
+    <Button
+        android:id="@+id/btn_ok"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/selectedColorView"
+        android:layout_alignParentEnd="true"
+        android:text="OK" />
+
+</RelativeLayout>
