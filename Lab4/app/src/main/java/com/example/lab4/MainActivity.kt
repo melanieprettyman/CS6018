@@ -90,7 +90,6 @@ fun JokeScreen(jokeViewModel: JokeViewModel = viewModel()) {
                 }
             }
         }
-
         Spacer(modifier = Modifier.height(16.dp))
 
         Button(
