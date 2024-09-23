@@ -96,7 +96,7 @@ fun JokeScreen(jokeViewModel: JokeViewModel = viewModel()) {
             onClick = { jokeViewModel.fetchNewJoke() },
             modifier = Modifier.align(Alignment.CenterHorizontally)
         ) {
-            Text("Next Joke")
+            Text("New Joke")
         }
     }
 }
