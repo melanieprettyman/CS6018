@@ -3,6 +3,7 @@ package com.example.makart
 
 import android.app.Application
 import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.StrokeCap
@@ -33,23 +34,31 @@ class DrawingViewModel(application: Application) : AndroidViewModel(application)
         lines.add(line)
     }
 
-    //Init JokeDao to access the local Room database for jokes.
     private val drawingDao: DrawingDao = DrawingDatabase.getDatabase(application).drawingDao()
 
     val drawingList: Flow<List<DrawingEntity>> = drawingDao.getAllDrawings()
 
+    var currentDrawing = mutableStateOf<DrawingEntity?>(null)
 
-    //Coroutine that makes a network request to fetch a random joke. The fetched joke is inserted
-    // into the Room database. The MutableStateFlow _currentJoke is updated with the fetched joke,
-    // and this triggers an update to the UI.
-    fun addDrawing(name: String) {
+    // Function to load drawing by ID
+    fun loadDrawing(drawingId: Int) {
         viewModelScope.launch {
-            try {
-                drawingDao.insertDrawing(DrawingEntity(name = name))
+            currentDrawing.value = drawingDao.getDrawingById(drawingId)
+        }
+    }
 
-
-            } catch (e: Exception) {
-               "Failed to insert drawing"
+    // Function to save a drawing (create or update)
+    fun saveDrawing(name: String, lines: List<Line>) {
+        viewModelScope.launch {
+            val drawing = currentDrawing.value
+            if (drawing != null) {
+                // Update existing drawing
+                val updatedDrawing = drawing.copy(name = name, lines = lines)
+                drawingDao.updateDrawing(updatedDrawing)
+            } else {
+                // Insert new drawing
+                val newDrawing = DrawingEntity(name = name, lines = lines)
+                drawingDao.insertDrawing(newDrawing)
             }
         }
     }

@@ -2,6 +2,7 @@ package com.example.makart
 
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -20,11 +21,12 @@ import androidx.compose.ui.unit.dp
 
 
 @Composable
-fun DrawingListItem(drawingEntity: DrawingEntity) {
+fun DrawingListItem(drawingEntity: DrawingEntity , onClick: () -> Unit) {
     ElevatedCard(
         modifier = Modifier
             .padding(16.dp, 8.dp)
-            .fillMaxWidth(),
+            .fillMaxWidth()
+            .clickable { onClick() },
         elevation = CardDefaults.cardElevation(
             defaultElevation = 10.dp
         ),
