@@ -45,7 +45,6 @@ class DrawingViewModel(application: Application) : AndroidViewModel(application)
     fun addDrawing(name: String) {
         viewModelScope.launch {
             try {
-                // Insert the joke into the database
                 drawingDao.insertDrawing(DrawingEntity(name = name))
 
 

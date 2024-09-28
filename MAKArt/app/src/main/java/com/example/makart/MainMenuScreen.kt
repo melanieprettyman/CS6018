@@ -18,6 +18,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
+import com.example.makart.DrawingListItem
 import com.example.makart.DrawingViewModel
 
 @Composable
@@ -47,14 +48,7 @@ fun MainMenuScreen(navController: NavController, drawingViewModel: DrawingViewMo
                 .padding(8.dp)
         ) {
             items(drawingList) { drawingEntity ->
-                    Text(
-                        text = drawingEntity.name,
-                        modifier = Modifier.padding(16.dp),
-                        style = androidx.compose.material3.MaterialTheme.typography.bodyMedium.copy(
-                            fontSize = 18.sp,
-                            fontWeight = FontWeight.Bold
-                        )
-                    )
+                    DrawingListItem(drawingEntity = drawingEntity)
                 }
             }
         }
