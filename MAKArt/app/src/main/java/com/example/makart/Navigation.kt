@@ -1,5 +1,6 @@
 package com.example.makart
 
+import MainMenuScreen
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
@@ -22,9 +23,8 @@ fun AppNavigation(navController: NavHostController) {
             })
         }
         composable(Screen.MainMenu.route) {
-            MainMenuScreen(onDrawClick = {
-                navController.navigate(Screen.DrawEditor.route)  // Navigate to DrawEditorScreen
-            })
+            // Pass the navController directly to MainMenuScreen
+            MainMenuScreen(navController = navController)
         }
         composable(Screen.DrawEditor.route) {
             DrawEditorScreen(
@@ -35,4 +35,5 @@ fun AppNavigation(navController: NavHostController) {
         }
     }
 }
+
 

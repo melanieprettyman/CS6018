@@ -174,6 +174,7 @@ fun DrawEditorScreen(
             onConfirm = { drawingName ->
                 // Handle the save logic, pass the drawing name to the view model or save functionality
                 showSaveDialog = false
+                drawingViewModel.addDrawing(drawingName)
                 Log.d("Lines", "$lines")
             },
             onDismiss = { showSaveDialog = false }
